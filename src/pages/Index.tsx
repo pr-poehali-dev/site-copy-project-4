@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import { useState } from "react";
 
 const Index = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -23,10 +26,47 @@ const Index = () => {
               Связаться
             </Button>
           </div>
-          <button className="md:hidden">
-            <Icon name="Menu" size={24} />
+          <button 
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
           </button>
         </div>
+        
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-background border-t border-border">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+              <a 
+                href="#services" 
+                className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Услуги
+              </a>
+              <a 
+                href="#portfolio" 
+                className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Портфолио
+              </a>
+              <a 
+                href="#about" 
+                className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                О нас
+              </a>
+              <Button 
+                className="bg-primary hover:bg-primary/90 w-full"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Связаться
+              </Button>
+            </div>
+          </div>
+        )}
       </nav>
 
       <section className="pt-32 pb-20 px-6">
